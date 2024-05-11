@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block start %}
+
+ <!-- Breadcrumb Start -->
+ <div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="/">Home</a>
+                <a class="breadcrumb-item active" href="/man/shirt">{{name}}</a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Breadcrumb End -->
+
+<div class="container-fluid pt-1">
+    {% if products %}
+    <div class="row px-xl-5">
+        {% for i in products %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-2 pb-2">
+            <div class="product-item bg-light" style="height: 100%; width: 100%;">
+                <div class="product-img position-relative overflow-hidden h-60 w-60">
+                    <img class="img-fluid" style="height: 50%; width: 100%;"  src="{{i.image.url}}" alt="">
+                    <div class="product-action">
+                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                        <a class="btn btn-outline-dark btn-square" href="{% url 'pdetailview' catname=catname subcatname=subcatname pname1=i.name pid=i.id %}"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+                <div class="text-center py-4" >
+                    <hr>
+                    <a class="h6 text-decoration-none text-truncate" href="">{{i.name}}</a>
+                    <div class="d-flex align-items-center justify-content-center mt-3">
+                        <h5>₹ {{i.dp}}</h5><h5 class="text-muted ml-2">₹<del>{{i.op}}</del></h5>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <h4>No products available..</h4>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock start %}
+
